@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import setsJson from "../../../public/sets.json";
-import cardsJson from "../../../public/cards.json";
+import paldeanFatesJson from "../../../public/paldeanFatesCards.json";
 
 const paldeanFates = () => {
   const paldeanFatesData = setsJson["data"].find(
@@ -13,24 +13,25 @@ const paldeanFates = () => {
 
   return (
     <>
-      <div className="">Paldean Fates Set</div>
-      <div className="border">
-        <p>Info on Paldean Fates</p>
+      <div className="text-3xl">Paldean Fates Set</div>
+      <div className="border italic rounded-md p-2">
         <p>Series: {paldeanFatesData?.series}</p>
         <p>Total number of Cards: {paldeanFatesData?.total}</p>
       </div>
-
-      <h1>Cards:</h1>
-      {cardsJson["data"].map((card) => {
-        return (
-          <div key={card["id"]}>
-            <div className="flex space-x-10">
-              <p>{card["name"]}</p>
-              <p>{card["set"]["name"]}</p>
+      <br></br>
+      <div className="text-2xl">Cards:</div>
+      <div className="grid grid-cols-3">
+        {paldeanFatesJson["data"].map((card) => {
+          return (
+            <div className="border" key={card["id"]}>
+              <div className="flex justify-between p-2">
+                <img src={card["images"]["large"]} width="200" />
+                <p>{card["cardmarket"]["prices"]["averageSellPrice"]} USD</p>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </>
   );
 };
